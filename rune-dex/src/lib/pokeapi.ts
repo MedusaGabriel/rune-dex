@@ -47,9 +47,6 @@ export function formatPokemonData(pokemon: Pokemon): PokemonSearchResult {
   };
 }
 
-/**
- * Busca lista de Pokémon com paginação
- */
 export async function fetchPokemonList(limit: number = 20, offset: number = 0) {
   try {
     const response = await fetch(`${POKEAPI_BASE_URL}/pokemon?limit=${limit}&offset=${offset}`);
@@ -66,9 +63,6 @@ export async function fetchPokemonList(limit: number = 20, offset: number = 0) {
   }
 }
 
-/**
- * Busca Pokémon por nome (com busca parcial)
- */
 export async function searchPokemonByName(name: string): Promise<PokemonSearchResult[]> {
   try {
     // Para busca simples, vamos tentar buscar o Pokémon diretamente
