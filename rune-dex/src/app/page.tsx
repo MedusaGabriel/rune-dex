@@ -33,7 +33,7 @@ export default function Home() {
             Rune<span className="text-yellow-400">Dex</span>
           </h1>
           <p className="text-xl text-white/80">
-            Calculadora de runas para PXG
+            Teste de Deploy
           </p>
         </div>
 
