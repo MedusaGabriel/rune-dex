@@ -32,9 +32,7 @@ export default function Home() {
           <h1 className="text-6xl font-bold text-white mb-4">
             Rune<span className="text-yellow-400">Dex</span>
           </h1>
-          <p className="text-xl text-white/80">
-            Teste de Deploy
-          </p>
+
         </div>
 
         {/* Search Bar */}
