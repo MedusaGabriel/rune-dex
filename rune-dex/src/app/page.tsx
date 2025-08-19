@@ -5,12 +5,19 @@ import SearchBar from '@/components/search-bar/search-bar';
 import PokemonCard from '@/components/pokemon-card';
 import Loading from '@/components/loading';
 import ErrorMessage from '@/components/error-message';
+import UserIcon from '@/components/user-icon';
+import UserModal from '@/components/user-modal';
+import UserHeader from '@/components/user-header';
+import AdminLayout from '@/components/admin-layout';
 import { PokemonSearchResult } from '@/types/pokemon';
 
 export default function Home() {
   const [pokemon, setPokemon] = useState<PokemonSearchResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<{ username: string; isAdmin: boolean } | null>(null);
+  const [isAdminLayoutOpen, setIsAdminLayoutOpen] = useState(false);
 
   const handleSearch = (result: PokemonSearchResult | null) => {
     setPokemon(result);
@@ -24,8 +31,44 @@ export default function Home() {
     setError(errorMessage);
   };
 
+  const handleLogout = () => {
+    setCurrentUser(null);
+    setIsAdminLayoutOpen(false);
+  };
+
+  const handleAdminAccess = () => {
+    setIsAdminLayoutOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+      {/* User Icon - só aparece se não estiver logado */}
+      {!currentUser && <UserIcon onClick={() => setIsUserModalOpen(true)} />}
+      
+      {/* User Header - aparece quando logado */}
+      {currentUser && (
+        <UserHeader 
+          currentUser={currentUser}
+          onAdminAccess={handleAdminAccess}
+          onLogout={handleLogout}
+        />
+      )}
+      
+      {/* User Modal */}
+      <UserModal 
+        isOpen={isUserModalOpen} 
+        onClose={() => setIsUserModalOpen(false)}
+        onUserLogin={setCurrentUser}
+      />
+
+      {/* Admin Layout */}
+      {isAdminLayoutOpen && currentUser?.isAdmin && (
+        <AdminLayout 
+          currentUser={currentUser}
+          onClose={() => setIsAdminLayoutOpen(false)}
+        />
+      )}
+
       <main className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-16">

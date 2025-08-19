@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { fetchPokemon, formatPokemonData } from '@/lib/pokeapi';
+import { mockDB } from '@/lib/mock-database';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -24,6 +25,25 @@ export async function GET(request: NextRequest) {
     }
 
     const formattedPokemon = formatPokemonData(pokemon);
+    
+    // Verificar se existe dados customizados no banco local
+    const customPokemon = mockDB.findPokemonByName(pokemonName || pokemon.name);
+    
+    // Se encontrou dados customizados, adicionar informações do modelo
+    if (customPokemon) {
+      return NextResponse.json({
+        success: true,
+        data: {
+          ...formattedPokemon,
+          customData: {
+            typeModel: customPokemon.typeModel,
+            isCustom: true,
+            customId: customPokemon.id,
+            createdAt: customPokemon.createdAt
+          }
+        }
+      });
+    }
     
     return NextResponse.json({
       success: true,

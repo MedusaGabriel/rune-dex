@@ -66,4 +66,10 @@ export interface PokemonSearchResult {
   name: string;
   image: string;
   types: string[];
+  customData?: {
+    typeModel: string;
+    isCustom: boolean;
+    customId: string;
+    createdAt: Date;
+  };
 }
