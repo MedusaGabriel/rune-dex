@@ -25,11 +25,7 @@ export async function GET(request: NextRequest) {
     }
 
     const formattedPokemon = formatPokemonData(pokemon);
-    
-    // Verificar se existe dados customizados no banco local
     const customPokemon = mockDB.findPokemonByName(pokemonName || pokemon.name);
-    
-    // Se encontrou dados customizados, adicionar informações do modelo
     if (customPokemon) {
       return NextResponse.json({
         success: true,

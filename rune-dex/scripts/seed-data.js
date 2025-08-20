@@ -8,12 +8,12 @@ import { getFirestore, collection, addDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   // Adicione sua configuração aqui
-  apiKey: "your_api_key",
-  authDomain: "your_project.firebaseapp.com",
-  projectId: "your_project_id",
-  storageBucket: "your_project.appspot.com",
-  messagingSenderId: "your_messaging_sender_id",
-  appId: "your_app_id"
+  apiKey: "AIzaSyBEMgy8lNiyCP67tQXBuYEGZ2JzazYnxBw",
+  authDomain: "rune-dex.firebaseapp.com",
+  projectId: "rune-dex",
+  storageBucket: "rune-dex.firebasestorage.app",
+  messagingSenderId: "281609770735",
+  appId: "1:281609770735:web:154418fb397b1cda3fad1a"
 };
 
 const app = initializeApp(firebaseConfig);

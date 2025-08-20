@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useFirestore } from '@/hooks/useFirestore';
 import { Pokemon } from '@/types/firebase';
-import ProtectedRoute from '@/components/protected-route';
 
 export default function PokemonsPage() {
   console.log('🎯 PokemonsPage: Componente renderizando');
@@ -140,16 +139,12 @@ export default function PokemonsPage() {
   }
 
   return (
-    <ProtectedRoute>
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Meus Pokémons</h1>
-          <button
-            onClick={() => setShowForm(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
-          >
-            Adicionar Pokémon
-          </button>
+          <div className="text-gray-600">
+            <span className="text-sm">Total: {pokemons.length} pokémons</span>
+          </div>
         </div>
 
         {error && (
@@ -253,6 +248,5 @@ export default function PokemonsPage() {
           </div>
         )}
       </div>
-    </ProtectedRoute>
   );
 }
